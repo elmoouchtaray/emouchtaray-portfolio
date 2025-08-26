@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import cvFile from '@assets/MOHAMMED ELMOUCHTARAY CV_1756230222904.pdf';
 import { 
   Mail, 
   Phone, 
@@ -67,8 +68,12 @@ export default function Portfolio() {
   }, []);
 
   const downloadCV = () => {
-    // Create a mock CV download - in real implementation, this would download an actual CV
-    alert("CV download would start here. Please contact me directly for my latest CV.");
+    const link = document.createElement('a');
+    link.href = cvFile;
+    link.download = 'Mohammed_Elmouchtaray_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (

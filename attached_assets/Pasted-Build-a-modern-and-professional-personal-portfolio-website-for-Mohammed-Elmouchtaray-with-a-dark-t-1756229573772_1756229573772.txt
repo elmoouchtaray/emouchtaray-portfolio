@@ -1,0 +1,52 @@
+Build a modern and professional personal portfolio website for "Mohammed Elmouchtaray" with a dark theme and responsive design. Use HTML, CSS, and JavaScript. The portfolio should look sleek and minimalistic with smooth transitions and a modern UI.
+
+Sections to include:
+1. **Hero Section**:  
+   - Full name: Mohammed Elmouchtaray  
+   - Short title: Web & Software Developer  
+   - A short tagline: "Passionate about web development, design, and creating modern applications."  
+   - Add a call-to-action button: "Download CV" (link to CV file).  
+
+2. **About Me**:  
+   - Brief bio using CV details: Passionate about web and software development, skilled in web design, database management, and project collaboration.  
+   - Personal details:  
+     - Date of Birth: 06/09/2003  
+     - Address: Elgharbia, Zemamra Sidi Bennour  
+     - Email: elmouchtaraymohamad7@email.com  
+     - Phone: 0693601225  
+
+3. **Skills** (display with progress bars or icons):  
+   - Web Development: HTML, CSS, JavaScript, SQL, VB.NET  
+   - Graphic Design: Photoshop  
+   - Databases: Microsoft Access, SQL Server, phpMyAdmin  
+   - Teamwork, Project Management, Deadlines  
+
+4. **Education Timeline**:  
+   - 2020-2021: Baccalauréat SVT – Lycée IBN ARABI  
+   - 2022-2023: Attestation – Photoshop & Video Editing, e-Commerce  
+   - 2023-2025: Diplôme – Développement Informatique  
+
+5. **Experience Section (Cards or Timeline)**:  
+   - 2022-2023: Stage – ARCH'IMMOMAROC, El Jadida (Photoshop visual design for real estate projects)  
+   - 2022-2023: Stage – INFOTOURISMEMAROC, El Jadida (Ad & digital design)  
+   - 2023-2024: Stage – UDIGITAL, Deroua (Landing pages with HTML, CSS, JS)  
+   - 2024-2025: Stage – NEXACOM, Deroua (VB.NET apps with database management)  
+
+6. **Languages Section**:  
+   - Arabic: Native  
+   - French: Intermediate  
+   - English: Intermediate  
+
+7. **Interests / Hobbies**: Reading, Traveling, Internet, Sports  
+
+8. **Contact Section**:  
+   - Contact form (name, email, message)  
+   - Social icons (email, phone, optional GitHub/LinkedIn placeholders)  
+
+Design requirements:  
+- Dark theme with accent color (neon blue or purple).  
+- Smooth hover effects, animations, and transitions.  
+- Responsive grid/flex layout for mobile and desktop.  
+- Use modern fonts and icons.  
+
+Add a footer: "© 2025 Mohammed Elmouchtaray – All Rights Reserved."

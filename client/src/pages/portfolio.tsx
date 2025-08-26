@@ -1,15 +1,5 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertContactSchema } from "@shared/schema";
-import { z } from "zod";
 import { 
   Mail, 
   Phone, 
@@ -32,56 +22,13 @@ import {
   Linkedin,
   Github,
   Twitter,
-  Instagram,
-  Send
+  Instagram
 } from "lucide-react";
 
-const contactFormSchema = insertContactSchema.extend({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const { toast } = useToast();
-
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
-      form.reset();
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Failed to send message",
-        description: "Please try again later or contact me directly.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
-  };
 
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -121,10 +68,7 @@ export default function Portfolio() {
 
   const downloadCV = () => {
     // Create a mock CV download - in real implementation, this would download an actual CV
-    toast({
-      title: "CV Download",
-      description: "CV download would start here. Please contact me directly for my latest CV.",
-    });
+    alert("CV download would start here. Please contact me directly for my latest CV.");
   };
 
   return (
@@ -216,7 +160,7 @@ export default function Portfolio() {
             <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed" data-testid="hero-tagline">
               Passionate about web development, design, and creating modern applications.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Button
                 onClick={downloadCV}
                 className="px-8 py-3 bg-gradient-to-r from-neon-cyan to-blue-500 text-white font-semibold rounded-lg hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-neon-cyan/25"
@@ -224,14 +168,6 @@ export default function Portfolio() {
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download CV
-              </Button>
-              <Button
-                onClick={() => smoothScrollTo("contact")}
-                variant="outline"
-                className="px-8 py-3 border-2 border-neon-cyan text-neon-cyan font-semibold rounded-lg hover:bg-neon-cyan hover:text-dark-bg transform transition-all duration-300"
-                data-testid="contact-button"
-              >
-                Get In Touch
               </Button>
             </div>
           </div>
@@ -541,73 +477,9 @@ export default function Portfolio() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="animate-fade-in-up" data-testid="contact-form-container">
-              <form 
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="bg-dark-card/30 backdrop-blur-sm p-8 rounded-2xl border border-gray-800/50 hover:border-neon-cyan/30 transition-all duration-300"
-              >
-                <div className="space-y-6">
-                  <div>
-                    <Label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Full Name
-                    </Label>
-                    <Input
-                      {...form.register("name")}
-                      className="w-full px-4 py-3 bg-dark-bg/50 border border-gray-700 rounded-lg focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 text-white placeholder-gray-500 transition-all duration-300"
-                      placeholder="Your Name"
-                      data-testid="input-name"
-                    />
-                    {form.formState.errors.name && (
-                      <p className="text-red-400 text-sm mt-1">{form.formState.errors.name.message}</p>
-                    )}
-                  </div>
-                  <div>
-                    <Label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email Address
-                    </Label>
-                    <Input
-                      {...form.register("email")}
-                      type="email"
-                      className="w-full px-4 py-3 bg-dark-bg/50 border border-gray-700 rounded-lg focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 text-white placeholder-gray-500 transition-all duration-300"
-                      placeholder="your@email.com"
-                      data-testid="input-email"
-                    />
-                    {form.formState.errors.email && (
-                      <p className="text-red-400 text-sm mt-1">{form.formState.errors.email.message}</p>
-                    )}
-                  </div>
-                  <div>
-                    <Label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                      Message
-                    </Label>
-                    <Textarea
-                      {...form.register("message")}
-                      rows={5}
-                      className="w-full px-4 py-3 bg-dark-bg/50 border border-gray-700 rounded-lg focus:border-neon-cyan focus:outline-none focus:ring-2 focus:ring-neon-cyan/20 text-white placeholder-gray-500 transition-all duration-300 resize-none"
-                      placeholder="Tell me about your project..."
-                      data-testid="input-message"
-                    />
-                    {form.formState.errors.message && (
-                      <p className="text-red-400 text-sm mt-1">{form.formState.errors.message.message}</p>
-                    )}
-                  </div>
-                  <Button
-                    type="submit"
-                    disabled={contactMutation.isPending}
-                    className="w-full px-8 py-4 bg-gradient-to-r from-neon-cyan to-blue-500 text-white font-semibold rounded-lg hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-neon-cyan/25 disabled:opacity-50 disabled:cursor-not-allowed"
-                    data-testid="submit-button"
-                  >
-                    <Send className="mr-2 h-4 w-4" />
-                    {contactMutation.isPending ? "Sending..." : "Send Message"}
-                  </Button>
-                </div>
-              </form>
-            </div>
-            
+          <div className="flex justify-center">
             {/* Contact Info */}
-            <div className="animate-fade-in-up">
+            <div className="animate-fade-in-up max-w-2xl">
               <div className="space-y-8">
                 <div className="bg-dark-card/30 backdrop-blur-sm p-8 rounded-2xl border border-gray-800/50 hover:border-neon-cyan/30 transition-all duration-300" data-testid="contact-info">
                   <h3 className="text-2xl font-bold mb-6 text-neon-cyan">Let's Connect</h3>
